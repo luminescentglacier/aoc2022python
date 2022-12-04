@@ -1,0 +1,28 @@
+version: "3"
+
+dotenv:
+  - ".env"
+
+tasks:
+  download:
+    desc: "Download input for the day"
+    dir: ./day{{.DAY}}
+    preconditions:
+      - sh: "[ {{.DAY}} ]"
+        msg: "DAY env var is not set"
+    status:
+      - test -s "input.txt"
+      - test -s "test.txt"
+    cmds:
+      - curl -f --cookie "session={{.SESSION}}" https://adventofcode.com/2022/day/{{.DAY}}/input -o input.txt
+      - curl -f --cookie "session={{.SESSION}}" https://adventofcode.com/2022/day/{{.DAY}} -o {{.DAY}}.html
+      - cmd: |
+          python -c "
+          from bs4 import BeautifulSoup as BS
+          from pathlib import Path
+          s = BS(Path('{{.DAY}}.html').read_text())
+          code = s.select('pre > code')[0].text.strip()
+          Path('test.txt').write_text(code)
+          print(code)
+          "
+      - rm {{.DAY}}.html
