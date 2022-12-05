@@ -1,4 +1,5 @@
 input.txt
+.cache.json
 
 ### VisualStudioCode template
 .vscode/*

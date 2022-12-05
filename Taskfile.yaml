@@ -4,12 +4,24 @@ dotenv:
   - ".env"
 
 tasks:
+  leaderboard:
+    desc: "Show AOC private leaderboard"
+    dir: ./
+    preconditions:
+      - sh: "[ {{.SESSION}} ]"
+        msg: "SESSION env var is not set. Get session cookie value from your browser."
+      - sh: "[ {{.LEADERBOARD_ID}} ]"
+        msg: "LEADERBOARD_ID env var is not set."
+    cmds:
+      - python leaderboard.py
+
+
   download:
     desc: "Download input for the day"
     dir: ./day{{.DAY}}
     preconditions:
       - sh: "[ {{.DAY}} ]"
-        msg: "DAY env var is not set"
+        msg: "DAY env var is not set."
     status:
       - test -s "input.txt"
       - test -s "test.txt"
