@@ -33,7 +33,7 @@ tasks:
           from bs4 import BeautifulSoup as BS
           from pathlib import Path
           s = BS(Path('{{.DAY}}.html').read_text())
-          code = s.select('pre > code')[0].text
+          code = s.select('pre > code')[0].text.rstrip('\n')
           Path('test.txt').write_text(code)
           print(code)
           "
