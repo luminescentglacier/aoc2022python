@@ -50,7 +50,7 @@ def completion(data: dict):
             print(f"  Part {part}")
             print_sorted(
                 {
-                    k: v[part]["get_star_ts"] if v else None
+                    k: v[part]["get_star_ts"] if v and part in v else None
                     for k, v in completions.items()
                 }
             )
