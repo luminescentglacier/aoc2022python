@@ -1,6 +1,8 @@
 from pathlib import Path
 from typing import Iterator
 
+INPUT_FILE = Path(__file__).parent / "input.txt"
+
 
 def parse(s: str) -> Iterator[tuple[tuple[int, int], tuple[int, int]]]:
     for line in s.splitlines():
@@ -40,6 +42,6 @@ def part_2(s: str) -> int:
 
 
 if __name__ == "__main__":
-    s = Path("input.txt").read_text()
+    s = INPUT_FILE.read_text()
     print(f"Part 1: {part_1(s)}")
     print(f"Part 2: {part_2(s)}")

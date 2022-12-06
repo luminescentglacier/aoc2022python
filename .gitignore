@@ -2,6 +2,7 @@ input.txt
 .cache.json
 
 ### VisualStudioCode template
+.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json

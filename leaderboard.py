@@ -57,7 +57,7 @@ def completion(data: dict):
         print()
 
 
-def print_sorted(stars: dict[str, int]):
+def print_sorted(stars: dict[str, int | None]):
     s = sorted(stars.items(), key=lambda kv: kv[1] if kv[1] else 99999999999999999)
     for i, (name, timestamp) in enumerate(s, start=1):
         comp_time = timestamp_to_str(timestamp) if timestamp else "None"

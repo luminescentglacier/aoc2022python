@@ -1,17 +1,20 @@
-import pytest
 from pathlib import Path
 
-from main import part_1, part_2
+import pytest
+
+from .main import part_1, part_2
+
+TEST_INPUT_FILE = Path(__file__).parent / "test.txt"
 
 
 @pytest.fixture
-def test_input():
-    return Path("test.txt").read_text()
+def puzzle_input():
+    return TEST_INPUT_FILE.read_text()
 
 
-def test_part_1(test_input):
-    assert part_1(test_input) == 15
+def test_part_1(puzzle_input):
+    assert part_1(puzzle_input) == 15
 
 
-def test_part_2(test_input):
-    assert part_2(test_input) == 12
+def test_part_2(puzzle_input):
+    assert part_2(puzzle_input) == 12

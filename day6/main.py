@@ -1,9 +1,11 @@
 import timeit
 from pathlib import Path
 
+INPUT_FILE = Path(__file__).parent / "input.txt"
+
 
 def find_marker(s: str, size: int) -> int:
-    candidates = ((i + size, s[i: i + size]) for i in range(len(s) - size))
+    candidates = ((i + size, s[i : i + size]) for i in range(len(s) - size))
     for pos, packet in candidates:
         if len(set(packet)) == size:
             return pos
@@ -19,8 +21,8 @@ def find_marker_optimized(s: str, size: int) -> int:
             return end
 
         missing = size - len(chars)
-        for c in set(s[beg:beg + missing]):
-            if c not in s[beg + missing:end]:
+        for c in set(s[beg : beg + missing]):
+            if c not in s[beg + missing : end]:
                 chars.discard(c)
         beg = beg + missing
 
@@ -52,7 +54,7 @@ def bench(s: str):
 
 
 if __name__ == "__main__":
-    s = Path("input.txt").read_text()
+    s = INPUT_FILE.read_text()
     print(f"Part 1: {part_1_optimized(s)}")
     print(f"Part 2: {part_2_optimized(s)}")
     bench(s)

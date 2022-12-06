@@ -1,6 +1,8 @@
 from pathlib import Path
 from typing import Iterable, Sequence
 
+INPUT_FILE = Path(__file__).parent / "input.txt"
+
 
 def parse(s: str) -> tuple[list[list[str]], Iterable[tuple[int, int, int]]]:
     crates_raw, instructions_raw = s.split("\n\n")
@@ -43,6 +45,6 @@ def part_2(s: str) -> str:
 
 
 if __name__ == "__main__":
-    s = Path("input.txt").read_text()
+    s = INPUT_FILE.read_text()
     print(f"Part 1: {part_1(s)}")
     print(f"Part 2: {part_2(s)}")

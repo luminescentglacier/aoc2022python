@@ -1,6 +1,8 @@
+import bisect
 from pathlib import Path
 from typing import Iterable
-import bisect
+
+INPUT_FILE = Path(__file__).parent / "input.txt"
 
 
 def get_elfs(s: str) -> Iterable[int]:
@@ -22,6 +24,6 @@ def part_2(s: str) -> int:
 
 
 if __name__ == "__main__":
-    s = Path("input.txt").read_text()
+    s = INPUT_FILE.read_text()
     print(f"Part 1: {part_1(s)}")
     print(f"Part 2: {part_2(s)}")
