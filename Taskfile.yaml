@@ -6,7 +6,6 @@ dotenv:
 tasks:
   leaderboard:
     desc: "Show AOC private leaderboard"
-    dir: ./
     preconditions:
       - sh: "[ {{.SESSION}} ]"
         msg: "SESSION env var is not set. Get session cookie value from your browser."
@@ -14,7 +13,6 @@ tasks:
         msg: "LEADERBOARD_ID env var is not set."
     cmds:
       - python leaderboard.py
-
 
   download:
     desc: "Download input for the day"
@@ -28,6 +26,7 @@ tasks:
     cmds:
       - curl -f --cookie "session={{.SESSION}}" https://adventofcode.com/2022/day/{{.DAY}}/input -o input.txt
       - curl -f --cookie "session={{.SESSION}}" https://adventofcode.com/2022/day/{{.DAY}} -o {{.DAY}}.html
+      - defer: rm {{.DAY}}.html
       - cmd: |
           python -c "
           from bs4 import BeautifulSoup as BS
@@ -37,4 +36,13 @@ tasks:
           Path('test.txt').write_text(code)
           print(code)
           "
-      - rm {{.DAY}}.html
+
+  init:
+    desc: "Setup project dir for the day"
+    preconditions:
+      - sh: "[ {{.DAY}} ]"
+        msg: "DAY env var is not set."
+    status:
+      - test -f day{{.DAY}}/__init__.py
+    cmds:
+      - cp -r template day{{.DAY}}
