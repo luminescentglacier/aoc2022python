@@ -13,8 +13,8 @@ def puzzle_input():
 
 
 def test_part_1(puzzle_input):
-    assert part_1(puzzle_input) == ...
+    assert part_1(puzzle_input) == 95437
 
 
 def test_part_2(puzzle_input):
-    assert part_2(puzzle_input) == ...
+    assert part_2(puzzle_input) == 24933642
