@@ -29,33 +29,29 @@ def parse_fs(s: str) -> Dir:
     root = Dir(name="/", parent=None)  # type: ignore
     pwd = root
 
-    lines = s.splitlines()
-    i = 0
-    while i < len(lines):
-        match lines[i][2:].split(maxsplit=1):
+    for entry in s.split("$ ")[1:]:
+        command, *output = entry.splitlines()
+        match command.split():
             case "cd", subdir:
                 match subdir:
                     case "/":
                         pwd = root
                     case "..":
                         pwd = pwd.parent
-                    case _:
+                    case subdir:
                         if not subdir in pwd.dirs:
                             pwd.dirs[subdir] = Dir(name=subdir, parent=pwd)
                         pwd = pwd.dirs[subdir]
-                i += 1
 
             case "ls",:
-                i += 1  # advance to ls output
-                while i < len(lines) and not lines[i].startswith("$"):
-                    match lines[i].split(maxsplit=1):
+                for line in output:
+                    match line.split(maxsplit=1):
                         case "dir", subdir:
                             if subdir not in pwd.dirs:
                                 pwd.dirs[subdir] = Dir(name=subdir, parent=pwd)
                         case size, file:
                             if file not in pwd.files:
                                 pwd.files[file] = int(size)
-                    i += 1
 
             case cmd:
                 raise ValueError(f"Unknown command {cmd}")
