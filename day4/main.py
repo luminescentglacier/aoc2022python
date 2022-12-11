@@ -1,3 +1,5 @@
+# --- Day 4: Camp Cleanup ---
+
 from pathlib import Path
 from typing import Iterator
 

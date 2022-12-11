@@ -1,3 +1,5 @@
+# --- Day 2: Rock Paper Scissors ---
+
 from itertools import starmap
 from pathlib import Path
 from typing import Iterable

@@ -1,3 +1,5 @@
+# --- Day 11: Monkey in the Middle ---
+
 from dataclasses import dataclass
 from functools import reduce
 from operator import mul

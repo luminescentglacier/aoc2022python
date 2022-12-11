@@ -1,3 +1,5 @@
+# --- Day 5: Supply Stacks ---
+
 from pathlib import Path
 from typing import Iterable, Sequence
 

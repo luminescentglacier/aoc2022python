@@ -23,6 +23,8 @@ tasks:
     status:
       - test -s "input.txt"
       - test -s "test.txt"
+    vars:
+      ADD_TITLE: "{{ .TITLE | default 0 }}"
     cmds:
       - curl -f --cookie "session={{.SESSION}}" https://adventofcode.com/2022/day/{{.DAY}}/input -o input.txt
       - curl -f --cookie "session={{.SESSION}}" https://adventofcode.com/2022/day/{{.DAY}} -o {{.DAY}}.html
@@ -31,10 +33,29 @@ tasks:
           python -c "
           from bs4 import BeautifulSoup as BS
           from pathlib import Path
-          s = BS(Path('{{.DAY}}.html').read_text())
-          code = s.select('pre > code')[0].text.rstrip('\n')
-          Path('test.txt').write_text(code)
+
+          test_input_file = Path('test.txt')
+          main_file = Path('main.py')
+          html_file = Path('{{.DAY}}.html')
+          soup = BS(html_file.read_text())
+
+          # title
+          title = soup.select('.day-desc > h2')[0].text
+          print(title)
+
+          # input
+          code = soup.select('pre > code')[0].text.rstrip('\n')
+          test_input_file.write_text(code)
           print(code)
+
+          if not {{.ADD_TITLE}}:
+              exit(0)
+          with main_file.open('r+') as file:
+              contents = file.read()
+              if not contents.startswith('# ---'):
+                  file.seek(0)
+                  file.write(f'# {title}\n\n')
+                  file.write(contents)
           "
 
   init:

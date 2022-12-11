@@ -1,3 +1,5 @@
+# --- Day 3: Rucksack Reorganization ---
+
 from pathlib import Path
 from typing import Iterable
 

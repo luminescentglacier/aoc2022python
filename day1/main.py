@@ -1,3 +1,5 @@
+# --- Day 1: Calorie Counting ---
+
 import bisect
 from pathlib import Path
 from typing import Iterable
