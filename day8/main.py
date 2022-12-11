@@ -1,8 +1,4 @@
-from functools import partial
-from itertools import takewhile
-from operator import mul
 from pathlib import Path
-from pprint import pprint
 
 import numpy as np
 
@@ -53,7 +49,7 @@ def score(grid, y, x) -> np.ndarray:
 
 
 def trees_visible(direction: np.ndarray, house: int) -> int:
-    total = 0
+    total = 0  # noqa
     for tree in direction:
         total += 1
         if tree >= house:

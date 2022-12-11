@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
@@ -11,8 +11,8 @@ def chunks(iterable: Iterable[str], size: int) -> Iterable[tuple[str, ...]]:
 
 
 def instructions(s: str) -> Iterable[tuple[str, list[int]]]:
-    for s in s.splitlines():
-        cmd, *arg = s.split(maxsplit=1)
+    for line in s.splitlines():
+        cmd, *arg = line.split(maxsplit=1)
         yield cmd, list(map(int, arg))
 
 

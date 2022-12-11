@@ -44,7 +44,7 @@ def part_2_optimized(s: str) -> int:
 
 
 def bench(s: str):
-    print(f"Bench")
+    print("Bench")
     p1 = timeit.timeit(lambda: part_1(s), number=10000)
     p1_opt = timeit.timeit(lambda: part_1_optimized(s), number=10000)
     print(f"  Part 1: {p1 / p1_opt:.2f}x")

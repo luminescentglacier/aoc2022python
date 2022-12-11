@@ -1,7 +1,5 @@
 from pathlib import Path
 
-import pytest
-
 from .main import part_1, part_2
 
 P1_TEST_INPUT_FILE = Path(__file__).parent / "test.txt"

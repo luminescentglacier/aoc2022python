@@ -1,4 +1,3 @@
-from collections import defaultdict
 from dataclasses import dataclass, field
 from functools import cached_property
 from pathlib import Path
@@ -39,11 +38,11 @@ def parse_fs(s: str) -> Dir:
                     case "..":
                         pwd = pwd.parent
                     case subdir:
-                        if not subdir in pwd.dirs:
+                        if subdir not in pwd.dirs:
                             pwd.dirs[subdir] = Dir(name=subdir, parent=pwd)
                         pwd = pwd.dirs[subdir]
 
-            case "ls",:
+            case ["ls"]:
                 for line in output:
                     match line.split(maxsplit=1):
                         case "dir", subdir:
