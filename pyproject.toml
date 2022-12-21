@@ -47,6 +47,8 @@ ignore = [
     # aoc specific
     "E731",
     "E741",
+    "F403",
+    "F405",
     # replaced by bugbear
     "E501",
 ]

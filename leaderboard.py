@@ -42,10 +42,12 @@ def completion(data: dict):
         completions = {
             m["name"]: m["completion_day_level"].get(str(day)) for m in members
         }
-        if not any(completions.values()):
-            return
 
         print(f"Day {day}")
+        if not any(completions.values()):
+            print("    No one solved this day yet\n")
+            continue
+
         for part in ("1", "2"):
             print(f"  Part {part}")
             print_sorted(
