@@ -38,7 +38,7 @@ def timestamp_to_str(timestamp: int) -> str:
 def completion(data: dict):
     members = data["members"].values()
 
-    for day in range(1, 25):
+    for day in range(1, 26):
         completions = {
             m["name"]: m["completion_day_level"].get(str(day)) for m in members
         }
